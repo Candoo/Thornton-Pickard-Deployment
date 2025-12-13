@@ -6,34 +6,46 @@ This repository contains the necessary configuration files (`docker-compose.yml`
 2.  **React UI:** `my-modern-react-setup`
 3.  **PostgreSQL Database**
 
-## ⚙️ Quick Start Setup
+# ⚙️ Quick Start Setup
 
-To run the entire stack, follow these steps:
+To run the entire stack, follow these steps. **The key is to maintain a specific directory structure for Docker Compose to find the build contexts.**
 
-1.  **Clone the deployment repository:**
+1.  **Create a central workspace directory** (e.g., `Projects`). Navigate into it.
+
+2.  **Clone all three repositories into this central workspace:**
+
     ```bash
-    git clone <URL of this repo>
-    cd thornton-pickard-fullstack-deployment
-    ```
-
-2.  **Clone the service repositories:**
-    The API and UI repos must be cloned one directory up, next to this deployment folder.
-    ```bash
-    cd .. 
+    # Ensure you are in the central workspace directory (e.g., /path/to/Projects)
+    git clone [https://github.com/Candoo/Pickard-Index.git](https://github.com/Candoo/Pickard-Index.git)
     git clone <URL for thornton-pickard-api>
     git clone <URL for my-modern-react-setup>
     ```
 
-3.  **Configure environment:**
-    Create your actual environment file based on the example:
+    **Your resulting directory structure MUST look like this:**
+    ```
+    /Projects/
+    ├── thornton-pickard-api/
+    ├── my-modern-react-setup/
+    └── Pickard-Index/   <-- YOU ARE HERE
+    ```
+    
+
+3.  **Navigate into the deployment directory:**
+
     ```bash
-    cp thornton-pickard-fullstack-deployment/.env.example thornton-pickard-fullstack-deployment/.env
-    # NOTE: Edit the .env file to change credentials if needed.
+    cd Pickard-Index
     ```
 
-4.  **Launch the stack:**
+4.  **Configure environment:**
+
     ```bash
-    cd thornton-pickard-fullstack-deployment
+    cp .env.example .env
+    # NOTE: Review and edit the .env file to change credentials.
+    ```
+
+5.  **Launch the stack:**
+
+    ```bash
     docker compose up -d --build
     ```
 
